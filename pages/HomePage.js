@@ -6,7 +6,8 @@ class HomePage {
     this.checkAvailabilityButton = page.getByRole('button', { name: /check availability/i });
     this.checkInInput = page.locator('input').nth(0);
     this.checkOutInput = page.locator('input').nth(1);
-    this.roomCards = page.locator('.room-card, .card, [data-testid*="room"]');
+    this.roomCards = page.locator('div').filter({ hasText: /£|per night|Book/i });
+    this.roomNames = page.locator('.room-card h3, .card h3, [data-testid*="room"] h3');
   }
 
   async open() {
@@ -31,11 +32,32 @@ class HomePage {
     await this.checkInInput.fill(formatDate(checkIn));
     await this.checkOutInput.fill(formatDate(checkOut));
     await this.checkAvailabilityButton.click();
+    
   }
 
   async verifyAvailableRoomsAreDisplayed() {
     await expect(this.roomCards.first()).toBeVisible({ timeout: 10000 });
   }
+
+
+   async getDisplayedRoomNames() {
+    await expect(this.roomCards.first()).toBeVisible({ timeout: 10000 });
+
+    const names = await this.roomNames.allTextContents();
+
+    return names
+      .map((name) => name.trim())
+      .filter((name) => name.length > 0);
+  }
+
+
+  async getDisplayedRoomCount() {
+  await expect(this.roomCards.first()).toBeVisible({ timeout: 10000 });
+  return await this.roomCards.count();
+}
+
+
+
 }
 
 module.exports = HomePage;

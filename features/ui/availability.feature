@@ -11,4 +11,5 @@ Feature: Availability Checker
   Scenario: User can search available rooms with valid dates
     Given I am on the B&B homepage
     When I search for rooms using valid dates
-    Then I should see available rooms for booking
+    Then available rooms should be displayed
+    And the availability results should be validated against the API
