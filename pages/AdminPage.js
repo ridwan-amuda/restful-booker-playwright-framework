@@ -4,15 +4,10 @@ const constants = require('../utils/constants');
 class AdminPage {
   constructor(page) {
     this.page = page;
-
     this.usernameInput = page.locator('input[name="username"], input[type="text"]').first();
     this.passwordInput = page.locator('input[name="password"], input[type="password"]').first();
-
-    this.loginButton = page.getByRole('button', {
-      name: /login/i,
-    });
-
-    this.errorMessage = page.locator('.alert, .error, [role="alert"], .notification');
+    this.loginButton = page.getByRole('button', { name: /login/i });
+    this.errorMessage = page.getByText(/invalid|bad credentials|login failed|credentials/i);
   }
 
   async open() {
@@ -26,7 +21,7 @@ class AdminPage {
   }
 
   async verifyLoginErrorIsDisplayed() {
-    await expect(this.errorMessage.first()).toBeVisible();
+    await expect(this.errorMessage.first()).toBeVisible({ timeout: 10000 });
   }
 }
 

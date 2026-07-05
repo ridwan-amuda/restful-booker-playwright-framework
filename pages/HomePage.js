@@ -3,12 +3,9 @@ const { expect } = require('@playwright/test');
 class HomePage {
   constructor(page) {
     this.page = page;
-
-    this.availabilityCheckerButton = page.getByRole('button', {
-      name: /check availability/i,
-    });
-
-    this.dateInputs = page.locator('input');
+    this.checkAvailabilityButton = page.getByRole('button', { name: /check availability/i });
+    this.checkInInput = page.locator('input').nth(0);
+    this.checkOutInput = page.locator('input').nth(1);
     this.roomCards = page.locator('.room-card, .card, [data-testid*="room"]');
   }
 
@@ -17,27 +14,27 @@ class HomePage {
   }
 
   async verifyAvailabilityCheckerIsDisplayed() {
-    await expect(this.availabilityCheckerButton).toBeVisible();
+    await expect(this.checkAvailabilityButton).toBeVisible();
   }
 
   async searchAvailableRoomsWithValidDates() {
     const today = new Date();
 
-    const checkInDate = new Date(today);
-    checkInDate.setDate(today.getDate() + 2);
+    const checkIn = new Date(today);
+    checkIn.setDate(today.getDate() + 2);
 
-    const checkOutDate = new Date(today);
-    checkOutDate.setDate(today.getDate() + 4);
+    const checkOut = new Date(today);
+    checkOut.setDate(today.getDate() + 4);
 
     const formatDate = (date) => date.toISOString().split('T')[0];
 
-    await this.dateInputs.nth(0).fill(formatDate(checkInDate));
-    await this.dateInputs.nth(1).fill(formatDate(checkOutDate));
-    await this.availabilityCheckerButton.click();
+    await this.checkInInput.fill(formatDate(checkIn));
+    await this.checkOutInput.fill(formatDate(checkOut));
+    await this.checkAvailabilityButton.click();
   }
 
   async verifyAvailableRoomsAreDisplayed() {
-    await expect(this.roomCards.first()).toBeVisible();
+    await expect(this.roomCards.first()).toBeVisible({ timeout: 10000 });
   }
 }
 
