@@ -11,7 +11,12 @@ class HomePage {
   }
 
   async open() {
-    await this.page.goto('/');
+    await this.page.goto('/', {
+    waitUntil: 'domcontentloaded',
+    timeout: 60000,
+  });
+
+  await this.page.waitForLoadState('domcontentloaded');
   }
 
   async verifyAvailabilityCheckerIsDisplayed() {
