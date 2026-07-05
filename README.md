@@ -92,7 +92,6 @@ This approach provides faster feedback while maintaining confidence in the overa
 restful-booker-playwright-framework
 
 ├── api
-│   ├── AuthAPI.js
 │   └── RoomAPI.js
 │
 ├── config
@@ -157,7 +156,7 @@ BASE_URL=https://automationintesting.online
 API_BASE_URL=https://automationintesting.online/api
 BROWSER=chromium
 HEADLESS=false
-DEFAULT_TIMEOUT=30000
+DEFAULT_TIMEOUT=60000
 ```
 
 ---
