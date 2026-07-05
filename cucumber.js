@@ -11,6 +11,6 @@ module.exports = {
       'progress',
       'html:reports/cucumber-report.html'
     ],
-    publishQuiet: true
+    
   }
 };
