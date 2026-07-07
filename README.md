@@ -98,7 +98,6 @@ restful-booker-playwright-framework
 │   └── environment.js
 │
 ├── features
-│   ├── api
 │   └── ui
 │
 ├── hooks
@@ -111,7 +110,6 @@ restful-booker-playwright-framework
 ├── reports
 │
 ├── step-definitions
-│   ├── api
 │   └── ui
 │
 ├── utils
