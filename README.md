@@ -76,13 +76,11 @@ Automated scenario:
 
 # Test Strategy
 
-The framework follows a layered testing approach.
+The framework follows a layered testing approach by combining UI automation with API validation.
 
-Business rules are validated through the API where appropriate because API tests execute faster and are generally more reliable than equivalent UI tests.
+Playwright is used to automate the critical customer journeys, while the API is used to independently validate backend data that supports those journeys. This provides additional confidence that the application behaves correctly beyond what is visible through the user interface alone.
 
-Playwright UI tests are then used to verify the customer journey and confirm the application behaves correctly from an end-user perspective.
-
-This approach provides faster feedback while maintaining confidence in the overall behaviour of the application.
+This approach keeps the automation maintainable, provides faster feedback where API validation is appropriate, and verifies the end-user experience through UI automation.
 
 ---
 
