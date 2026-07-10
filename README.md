@@ -187,7 +187,7 @@ Playwright also captures screenshots, traces and videos for failed tests to supp
 
 # CI/CD Approach
 
-The framework is designed to support continuous integration.
+TThe framework is designed to support continuous integration by automatically executing the Playwright BDD scenarios on every code change. As part of the Availability Checker journey, the framework also performs API validation to provide additional confidence in the backend data supporting the user interface..
 
 ```text
 Developer Push
@@ -199,10 +199,7 @@ Checkout Source
 Install Dependencies
         │
         ▼
-Run API Tests
-        │
-        ▼
-Run UI Tests
+Run Automated Tests
         │
         ▼
 Generate Reports
