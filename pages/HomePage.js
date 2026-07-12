@@ -16,7 +16,6 @@ class HomePage {
     timeout: 60000,
   });
 
-  await this.page.waitForLoadState('domcontentloaded');
   }
 
   async verifyAvailabilityCheckerIsDisplayed() {
@@ -25,13 +24,10 @@ class HomePage {
 
   async searchAvailableRoomsWithValidDates() {
     const today = new Date();
-
     const checkIn = new Date(today);
     checkIn.setDate(today.getDate() + 2);
-
     const checkOut = new Date(today);
     checkOut.setDate(today.getDate() + 4);
-
     const formatDate = (date) => date.toISOString().split('T')[0];
 
     await this.checkInInput.fill(formatDate(checkIn));
@@ -43,23 +39,6 @@ class HomePage {
   async verifyAvailableRoomsAreDisplayed() {
     await expect(this.roomCards.first()).toBeVisible({ timeout: 10000 });
   }
-
-
-   async getDisplayedRoomNames() {
-    await expect(this.roomCards.first()).toBeVisible({ timeout: 10000 });
-
-    const names = await this.roomNames.allTextContents();
-
-    return names
-      .map((name) => name.trim())
-      .filter((name) => name.length > 0);
-  }
-
-
-  async getDisplayedRoomCount() {
-  await expect(this.roomCards.first()).toBeVisible({ timeout: 10000 });
-  return await this.roomCards.count();
-}
 
 
 
